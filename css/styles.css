@@ -1,27 +1,66 @@
+/*
+<!DOCTYPE css>
+Jamal Moubarak
+Project 2
+VFW 1303
+*/
+
 html {
-    background-color: #ffffff;
-}
-body {
-    font-family: "Lucida Grande", "Arial", sans-serif;
-    margin: 1.5em auto;
-    padding: 1.5em;
     background-color: white;
+}
+header {
+	font-size: 80%;
+}
+.addButton {
+	text-align: center;
+}
+a:link {
+	color: blue;
+}
+a:hover {
+	color: #130e46;
+	outline: 1px dotted;
+}
+fieldset {
+    font-family: helvetica, arial, sans-serif;
+    font-size: 80%;
+    margin: 0em auto;
+    padding: 1em auto;
+    background-color: #f1f1f1;
     color: #4D4B39;
     max-width: 35em;
     border: 5px solid #6e6e6e;
     line-height: 1.5em;
 }
-p {
-    margin: 1.5em 0;
+h1 {
+	color: #f5f800;
+	font-family: helvetica, arial, sans-serif;
+	text-align: center;
+	margin: 0em -1em 0.5em -1em;
+	padding: 0.5em 0em 0.5em 0em;
+	background-color: #07002b;
 }
 h2 {
-    
-    color: #124bb4;
-    font-size: 115%;
-    padding: 1em;
-    margin: -1.5em -1em -1em -1em;
+	color: #ff8c05;
+	font-family: helvetica, arial, sans-serif;
+	font-size: 225%;
+	text-align: center;
+	margin: 1em -1em 0.5em -1em;
+	padding: 0.5em 0em 0.5em 0em;
+	background-color: ;	
 }
-h1 + h2 {
-    margin-top: -2em;
-    padding-top: 0;
+h3 {
+	color: #ff8c05;
+	font-family: helvetica, arial, sans-serif;
+	text-align: left;
+	margin: 0em -1em 0em 0.5em;
+	padding: 0.5em 0em 0.5em 0em;
+	background-color: ;
+}
+legend {
+	color: #ff8c05;	
+}
+.saveButton {
+	text-align: right;
+	margin: 0.2em 0em 0em 0em
 }
