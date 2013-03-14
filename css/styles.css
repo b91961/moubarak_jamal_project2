@@ -1,0 +1,27 @@
+html {
+    background-color: #ffffff;
+}
+body {
+    font-family: "Lucida Grande", "Arial", sans-serif;
+    margin: 1.5em auto;
+    padding: 1.5em;
+    background-color: white;
+    color: #4D4B39;
+    max-width: 35em;
+    border: 5px solid #6e6e6e;
+    line-height: 1.5em;
+}
+p {
+    margin: 1.5em 0;
+}
+h2 {
+    
+    color: #124bb4;
+    font-size: 115%;
+    padding: 1em;
+    margin: -1.5em -1em -1em -1em;
+}
+h1 + h2 {
+    margin-top: -2em;
+    padding-top: 0;
+}
