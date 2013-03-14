@@ -19,7 +19,7 @@ a:link {
 }
 a:hover {
 	color: #130e46;
-	outline: 1px dotted;
+	outline: 1px dotted blue;
 }
 fieldset {
     font-family: helvetica, arial, sans-serif;
@@ -63,4 +63,7 @@ legend {
 .saveButton {
 	text-align: right;
 	margin: 0.2em 0em 0em 0em
+}
+.priceField {
+	display: none
 }

@@ -19,7 +19,6 @@ VFW 1303
     	<title>Eskatech Surveillance Client Install Log</title>
     	
     	<link href="css/styles.css" rel="stylesheet" type="text/css" />
-    	<script type="text/javascript" src="js/main.js"></script>
     </head>
     
     <body>
@@ -27,11 +26,12 @@ VFW 1303
 		<header>
 			<img src="img/logo.jpg" width="140" height="39" title="Eskatech Logo" />
 			<h1>Client Install Log</h1>
-			<a href="#">Display Stored Data</a></li>
-			<a href="#">Clear Stored Data</a></li>
+			<a href="#" id="displayData">Display Stored Data</a>
+			<a href="#" id="clearData">Clear Stored Data</a>
+			<a href="additem.html" id="addClient" style="display:none;">Add New Client</a>
 		</header>
-		<form action="#" method="post">
-			<fieldset>
+		<form action="#" method="post" id="installForm" />
+			<fieldset id="installFieldset">
 				<legend>Client Info</legend>
 					<li>
 						<label for="install">Select Install Type</label>
@@ -44,7 +44,7 @@ VFW 1303
 							</optgroup>
 						</select>
 					</li>
-				<ul>
+				<ul id= "clientInfo">
 					<li><label for="compname">Company Name:</label><br><input type="text" id="compname" /></li>
 					<li><label for="contname">Contact Name:</label><br><input type="text" id="contname" /></li>
 					<li><label for="contphone">Contact Phone #:</label><br><input type="text" id="contphone" placeholder="xxx-xxx-xxxx" /></li>
@@ -53,22 +53,22 @@ VFW 1303
 			</fieldset>
 			<fieldset>
 				<legend>Install Info</legend>
-				<ul>
-					<li><label for="date">Date:</label><br><input type="date" id="date" placeholder="mm-dd-yyyy" /></li>
+				<ul id= "installInfo">
+					<li><label for="date">Date:</label><br><input type="date" id="date" placeholder="yyyy-mm-dd" /></li>
 					<li><label for="ipaddress">Ip Address:</label><br><input type="text" id="ipaddress" placeholder="192.168.001.001" /></li>
 					<li><label for="sysuser">System Username:</label><br><input type="text" id="sysuser" /></li>
 					<li><label for="syspass">System Password:</label><br><input type="text" id="syspass" /></li>
 					<li>Check the Systems Installed:
 						<ul>
-							<li><input type="checkbox" value="Surveillance" id="surveillance" /><label for="surveillance">Surveillance</label></li>
-							<li><input type="checkbox" value="Audio / Video" id="audiovideo" /><label for="audiovideo">Audio / Video</label></li>
-							<li><input type="checkbox" value="Network" id="network" /><label for="network">Network</label></li>
-							<li><input type="checkbox" value="POS" id="pos" /><label for="pos">POS</label></li>
+							<li><input type="checkbox" value="Surveillance" id="surveillance" name="installed" /><label for="surveillance">Surveillance</label></li>
+							<li><input type="checkbox" value="Audio / Video" id="audiovideo" name="installed" /><label for="audiovideo">Audio / Video</label></li>
+							<li><input type="checkbox" value="Network" id="network" name="installed" /><label for="network">Network</label></li>
+							<li><input type="checkbox" value="POS" id="pos" name="installed" /><label for="pos">POS</label></li>
 						</ul>
 					</li>
 					<li>Quantity (# of Cameras, TV's, POS Terminals, etc):
 						<ul>
-							<li><input type="range" min="1" max="32" value="1" step="2" /></li>
+							<li><label for="quanity"><input type="range" min="1" max="32" value="1" step="2" /></li>
 						</ul>
 					</li>
 					<li>Warranty:
@@ -79,14 +79,17 @@ VFW 1303
 							<li><input type="radio" value="5 Year" id="5year" name="warranty" /><label for="5year">5 Year</label></li>
 						</ul>
 					</li>
-					<li><label for="price">Price:</label><input type="hidden" id="price" /></li>
+					<div class="priceField">
+						<li><label for="price">Price:</label><input type="text" id="price" /></li>
+					</div>
 					<li><label for="notes">Notes:</label><textarea id="notes" placeholder="Type any extra information here."></textarea></li>
 				</ul>
 			</fieldset>
 			<div class="saveButton">
 				<input type="image" src="img/submitButton.jpg" width="130" height="35" border="0" alt="Submit Form"></li>
 			</div>
-		</form>			
+		</form>
+		<script type="text/javascript" src="js/main.js"></script>			
     </body>
 </html>
 
