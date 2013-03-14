@@ -1,6 +1,6 @@
 // alert("JavaScript works!");
 
 // Jamal Moubarak
-// Project 1
+// Project 2
 // VFW 1303
 
