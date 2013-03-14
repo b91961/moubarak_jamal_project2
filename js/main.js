@@ -13,6 +13,12 @@ window.addEventListener("DOMContentLoaded", function(){
 		return theElement;
 	}
 	
+	//Establish Variable Defaults & Run Initial Functions
+	var installGroups = ["--Type of System--", "Audio / Video", "Network", "POS"],
+		warrantyValue,
+		installedValue
+	;
+	
 	//Create select field and give items.
 	function installType(){
 		var formTag = document.getElementsByTagName("form"),
@@ -22,8 +28,8 @@ window.addEventListener("DOMContentLoaded", function(){
 		for ( var i=0, j=installGroups.length; i<j; i++) {
 			var chooseOption = document.createElement("option");
 			var optList = installGroups[i];
-			makeOption.setAttribute("value", contactGroups[i]);
-			makeOption.innerHTML = optList;
+			chooseOption.setAttribute("value", installGroups[i]);
+			chooseOption.innerHTML = optList;
 			chooseSelect.appendChild(chooseOption);
 		}
 		chooseLi.appendChild(chooseSelect);
@@ -41,11 +47,10 @@ window.addEventListener("DOMContentLoaded", function(){
 	
 	//Get the value of the checkbox when clicked.
 	function getChecks(){
-		var checks = document.forms[0].installed;
-		for (var i=0; i<radios.length; i++){
-			if(checks[i].checked){
-				installedValue = checks[i].value;
-			}
+		if($("installed").checked){
+			installedValue = $("installed").value;
+		}else{
+			installedValue = "No Items Installed";
 		}
 	}
 	
@@ -54,13 +59,13 @@ window.addEventListener("DOMContentLoaded", function(){
 		switch(n){
 			case "on":
 				$("installForm").style.display = "none";
-				$("clearData").style.display = "inline";
+				$("clear").style.display = "inline";
 				$("displayData").style.display = "none";
 				$("addClient").style.display = "inline";
 				break;
 			case "off":
 				$("installForm").style.display = "block";
-				$("clearData").style.display = "inline";
+				$("clear").style.display = "inline";
 				$("displayData").style.display = "inline";
 				$("addClient").style.display = "none";
 				$("items").style.display = "none";
@@ -71,14 +76,14 @@ window.addEventListener("DOMContentLoaded", function(){
 	}
 	
 	//Saves the form data into local storage.
-	function storeData(key){
+	function saveData(key){
 		var is = Math.floor(Math.random()*100000001);
-		id = key;
+		var id = key;
 		getRadio();
 		getChecks();
 		var item 				= {};
 			item.install 		= ["Install:", $("installed").value];
-			item.compname		= ["Company Name:", $("compname"), value];
+			item.compname		= ["Company Name:", $("compname").value];
 			item.contname		= ["Contact Name:", $("contname").value];
 			item.contphone		= ["Contact Phone #:", $("contphone").value];
 			item.contemail		= ["Contact Email:", $("contemail").value];
@@ -89,7 +94,7 @@ window.addEventListener("DOMContentLoaded", function(){
 			item.installed 		= ["The client has these systems installed:", installedValue];
 			item.warranty 		= ["The client has this warranty:", warrantyValue];
 			item.quanity 		= ["Quantity (# of Cameras, TV's, POS Terminals, etc):", $("quanity").value];
-			item.price			= ["Price:", $("price"), value];
+			item.price			= ["Price:", $("price").value];
 			item.notes			= ["Notes:", $("notes").value];
 		localStorage.setItem(id, JSON.stringify(item));
 		alert("Client Information is Saved!");
@@ -140,17 +145,17 @@ window.addEventListener("DOMContentLoaded", function(){
 	
 	
 	//Retrieve data from Local Storage.
-	function getData(){
+	function showData(){
 		linkControls("on");
 		if(localStorage.length === 0){
 			autoFillData();
-			alert("No Clients have been entered yet.")
+			alert("No Clients have been entered yet.");
 		}
 		//Insert data from Local Storage to the browser window.
 		var chooseDiv = document.createElement("div");
 		chooseDiv.setAttribute("id", "items");
 		var chooseList = document.createElement("ul");
-		chooseDiv.appenChild(chooseList);
+		chooseDiv.appendChild(chooseList);
 		document.body.appendChild(chooseDiv);
 		for (var i=0, len=localStorage.length; i<len; i++) {
 			var q = -1;
@@ -173,7 +178,7 @@ window.addEventListener("DOMContentLoaded", function(){
 	}
 	
 	//Clear all stored data
-	function clearLocal() {
+	function clearStorage() {
 		if(localStorage.length === 0){
 			alert("You have no Clients to Clear.");
 		}else{
@@ -184,23 +189,18 @@ window.addEventListener("DOMContentLoaded", function(){
 		}
 	}
 	
-	//Establish Variable Defaults & Run Initial Functions
-	var installGroups = ["--Type of System--", "Audio / Video", "Network", "POS"],
-		warrantyValue,
-		installedValue
-	;
+
 	
 	//Set Link & Submit Click Events
-	var displayLink = $("displayLink");
-	displayLink.addEventListener("click", getData);
-	var clearLink = $("clear");
-	clearLink.addEventListener("click", clearLocal);
-	var save = $("submit");
-	save.addEventListener("click, storeData");
+	var displayData = $("displayData");
+	displayData.addEventListener("click", showData);
+	var clearData = $("clear");
+	clearData.addEventListener("click", clearStorage);
+	var save = $("submitButton");
+	save.addEventListener("click", saveData);
 	//Set Checkbox & Radio Click Events: Attach event listener to each radio button & checkbox.
-	var checks = document.forms[0].installed;
-	for (var i=0; i<checks.length; i++){
-		checks[i].addEventListener("click", getChecks);
+	var checks = $("installed");
+	checks.addEventListener("click", getChecks);
 	var radios = document.forms[0].warranty;
 	for (var i=0; i<radios.length; i++){
 		radios[i].addEventListener("click", getRadio);
@@ -208,6 +208,5 @@ window.addEventListener("DOMContentLoaded", function(){
 	//Run installType();
 	installType();	
 	
-
 });
 
