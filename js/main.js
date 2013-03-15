@@ -21,38 +21,20 @@ window.addEventListener("DOMContentLoaded", function(){
 	
 	//Create select field and give items.
 	function installType(){
-		var formTag = document.getElementsByTagName("form"),
-			chooseLi = $("install"),
-			chooseSelect = document.createElement("install");
-		chooseSelect.setAttribute("id", "groups");
-		for ( var i=0, j=installGroups.length; i<j; i++) {
-			var chooseOption = document.createElement("option");
-			var optList = installGroups[i];
-			chooseOption.setAttribute("value", installGroups[i]);
-			chooseOption.innerHTML = optList;
-			chooseSelect.appendChild(chooseOption);
+		var getTag = document.getElementsByTagName("form"),
+			getLi = $("select"),
+			getSelect = document.createElement("select");
+			getSelect.setAttribute("id", "groups");
+		for(var i=0, j=installGroups.length; i<j; i++) {
+			var getOption = document.createElement("option");
+			var optionText = installGroups[i];
+			getOption.setAttribute("value", optionText);
+			getOption.innerHTML = optionText;
+			getSelect.appendChild(getOption);
 		}
-		chooseLi.appendChild(chooseSelect);
+		getLi.appendChild(getSelect);
 	}
-	
-	//Find the value of radio button that is selected.
-	function getRadio(){
-		var radios = document.forms[0].warranty;
-		for (var i=0; i<radios.length; i++){
-			if(radios[i].checked){
-				warrantyValue = radios[i].value;
-			}
-		}
-	}
-	
-	//Get the value of the checkbox when clicked.
-	function getChecks(){
-		if($("installed").checked){
-			installedValue = $("installed").value;
-		}else{
-			installedValue = "No Items Installed";
-		}
-	}
+	installType();
 	
 	//Turn the links on or off.
 	function linkControls(n){
@@ -75,14 +57,32 @@ window.addEventListener("DOMContentLoaded", function(){
 		}
 	}
 	
+		//Find the value of radio button that is selected.
+	function getRadio(){
+		var radios = document.forms[0].warranty;
+		for(var i=0; i<radios.length; i++){
+			if(radios[i].checked){
+				warrantyValue = radios[i].value;
+			}
+		}
+	}
+	
+	//Get the value of the checkbox when clicked.
+	function getChecks(){
+		if($("installed").checked){
+			installedValue = $("installed").value;
+		}else{
+			installedValue = "No Items Installed";
+		}
+	}
+	
 	//Saves the form data into local storage.
-	function saveData(key){
-		var is = Math.floor(Math.random()*100000001);
-		var id = key;
+	function saveData(){
+		var id = Math.floor(Math.random()*100000001);
 		getRadio();
 		getChecks();
 		var item 				= {};
-			item.install 		= ["Install:", $("installed").value];
+			item.group 			= ["Install:", $("groups").value];
 			item.compname		= ["Company Name:", $("compname").value];
 			item.contname		= ["Contact Name:", $("contname").value];
 			item.contphone		= ["Contact Phone #:", $("contphone").value];
@@ -199,14 +199,11 @@ window.addEventListener("DOMContentLoaded", function(){
 	var save = $("submitButton");
 	save.addEventListener("click", saveData);
 	//Set Checkbox & Radio Click Events: Attach event listener to each radio button & checkbox.
-	var checks = $("installed");
-	checks.addEventListener("click", getChecks);
+	var checkbox = $("installed");
+	checkbox.addEventListener("click", getChecks);
 	var radios = document.forms[0].warranty;
 	for (var i=0; i<radios.length; i++){
 		radios[i].addEventListener("click", getRadio);
 	}
-	//Run installType();
-	installType();	
-	
 });
 
