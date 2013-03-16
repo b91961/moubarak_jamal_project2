@@ -14,7 +14,7 @@ window.addEventListener("DOMContentLoaded", function(){
 	}
 	
 	//Establish Variable Defaults & Run Initial Functions
-	var installGroups = ["--Type of System--", "Audio / Video", "Network", "POS"],
+	var installGroups = ["--Type of System--", "Surveillance", "Audio / Video", "Network", "POS"],
 		warrantyValue,
 		installedValue
 	;
@@ -69,10 +69,13 @@ window.addEventListener("DOMContentLoaded", function(){
 	
 	//Get the value of the checkbox when clicked.
 	function getChecks(){
-		if($("installed").checked){
-			installedValue = $("installed").value;
-		}else{
-			installedValue = "No Items Installed";
+		var checkbox = document.forms[0].installed;
+		for(var i=0; i<checkbox.length; i++){
+			if(checkbox[i].checked){
+				installedValue = checkbox.value;
+			}else{
+				installedValue = "No Items Installed";
+			}
 		}
 	}
 	
@@ -98,6 +101,7 @@ window.addEventListener("DOMContentLoaded", function(){
 			item.notes			= ["Notes:", $("notes").value];
 		localStorage.setItem(id, JSON.stringify(item));
 		alert("Client Information is Saved!");
+		console.log(id)
 	}
 	
 	//JSON DATA: Create an object to test when no data is saved in Local Storage.
@@ -117,7 +121,7 @@ window.addEventListener("DOMContentLoaded", function(){
 				"warranty": ["The client has this warranty:", "3 Year"],
 				"quanity": ["Quanity:", "4"],
 				"price": ["Price", "$4595.00"],
-				"notes": ["Notes:", "We installed 4 POS systems at the from counter off of a network switch we installed"]			
+				"notes": ["Notes:", "We installed 4 POS systems at the front counter off of a network switch we installed"]			
 			},
 			"client2":{
 				"install": ["Install:", "Surveillance"],
@@ -133,7 +137,7 @@ window.addEventListener("DOMContentLoaded", function(){
 				"warranty": ["The client has this warranty:", "5 Year"],
 				"quanity": ["Quanity:", "32"],
 				"price": ["Price", "$7995.00"],
-				"notes": ["Notes:", "Installed 8 cams 1st floor, 8 2nd floor, 8 3rd floor, 8 outside"]
+				"notes": ["Notes:", "We installed 8 cams 1st floor, 8 2nd floor, 8 3rd floor, 8 outside"]
 			}
 		};
 		//Store the test data into Local Storage
@@ -149,7 +153,7 @@ window.addEventListener("DOMContentLoaded", function(){
 		linkControls("on");
 		if(localStorage.length === 0){
 			autoFillData();
-			alert("No Clients have been entered yet.");
+			alert("No Clients have been entered yet.  Here is some sample data.");
 		}
 		//Insert data from Local Storage to the browser window.
 		var chooseDiv = document.createElement("div");
@@ -199,11 +203,13 @@ window.addEventListener("DOMContentLoaded", function(){
 	var save = $("submitButton");
 	save.addEventListener("click", saveData);
 	//Set Checkbox & Radio Click Events: Attach event listener to each radio button & checkbox.
-	var checkbox = $("installed");
-	checkbox.addEventListener("click", getChecks);
+	var checkbox = document.forms[0].installed;
+	for (var i=0; i<checkbox.length; i++){
+		checkbox[i].addEventListener("click", getChecks);
+	}
 	var radios = document.forms[0].warranty;
-	for (var i=0; i<radios.length; i++){
-		radios[i].addEventListener("click", getRadio);
+	for (var p=0; p<radios.length; p++){
+		radios[p].addEventListener("click", getRadio);
 	}
 });
 
